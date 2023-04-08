@@ -11,13 +11,18 @@ class Principal:
         self.teacher_id = teacher_id
 
 
+# def accept_payload(func):
+#     @wraps(func)
+#     def wrapper(*args, **kwargs):
+#         incoming_payload = request.json
+#         return func(incoming_payload, *args, **kwargs)
+#     return wrapper
 def accept_payload(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         incoming_payload = request.json
-        return func(incoming_payload, *args, **kwargs)
+        return func(*args, incoming_payload=incoming_payload, **kwargs)
     return wrapper
-
 
 def auth_principal(func):
     @wraps(func)
